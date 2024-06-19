@@ -1,0 +1,93 @@
+
+class ZeroObject(object):
+    def __add__(self, other):
+        return other
+def abriviation (mass):
+    if 'Partial' in (sum(mass, ZeroObject())):
+        return(sum(mass, ZeroObject())[:5]+'Partial')
+    else:
+        return(sum(mass, ZeroObject())[:5])
+
+
+import pandas as pd
+
+
+
+cols=['Netherlands','Czechia','Lithuania','Austria','Poland','Slovenia','Estonia','Italy','Slovakia','Ireland','Denmark',
+'Iceland','Cyprus','Greece','Belgium','Bulgaria','France','Germany','Latvia','Spain','Norway','Romania','Liechtenstein',
+ 'Portugal','Luxembourg','Hungary','Malta','Croatia','Finland','Sweden']
+        
+cols=sorted(cols)        
+rows=['EntertainmentVenuesPartial','RestaurantsCafesPartial','EntertainmentVenues','MassGatherAll','ClosSec','GymsSportsCentresPartial','ClosPrim',
+ 'NonEssentialShopsPartial','ClosPubAnyPartial','RestaurantsCafes','GymsSportsCentres','MassGather50','PrivateGatheringRestrictions',
+ 'MassGatherAllPartial',
+ 'ClosHigh','NonEssentialShops','ClosSecPartial','OutdoorOver500','ClosDaycare','BanOnAllEvents','IndoorOver500','QuarantineForInternationalTravellers',
+ 'ClosHighPartial','IndoorOver100','Teleworking','ClosPubAny','PlaceOfWorshipPartial','MasksMandatoryClosedSpacesPartial','MassGather50Partial',
+ 'StayHomeOrderPartial','OutdoorOver100','IndoorOver50','ClosPrimPartial','PrivateGatheringRestrictionsPartial','MasksMandatoryClosedSpaces',
+ 'OutdoorOver1000','TeleworkingPartial','MasksMandatoryAllSpaces','OutdoorOver50','StayHomeOrder','QuarantineForInternationalTravellersPartial',
+ 'MasksMandatoryAllSpacesPartial','StayHomeGen','PlaceOfWorship','ClosDaycarePartial','IndoorOver1000','BanOnAllEventsPartial',
+ 'HotelsOtherAccommodationPartial',
+ 'StayHomeRiskG','ClosureOfPublicTransportPartial','AdaptationOfWorkplace','HotelsOtherAccommodation','MasksVoluntaryClosedSpacesPartial',
+ 'RegionalStayHomeOrderPartial','AdaptationOfWorkplacePartial','MasksVoluntaryAllSpaces','MasksVoluntaryAllSpacesPartial','MasksVoluntaryClosedSpaces',
+ 'SocialCircle','WorkplaceClosures','RegionalStayHomeOrder','ClosureOfPublicTransport','StayHomeGenPartial','WorkplaceClosuresPartial',
+ 'StayHomeRiskGPartial','SocialCirclePartial']
+rows=['B.1.617.2','B.1.1.7','BA.2','Spring','Summer','Autumn','Winter','PreVaccination','PostVaccination']+ sorted(rows)    
+df = pd.DataFrame(columns = cols,
+        index = rows)
+
+for i in range(len(score)):
+    for j in score[i][2]:
+        df.loc[score[i][1][0]][j[0]]=j[1][1]
+df= df.astype(float)
+df=df.round(2)
+df=df*100
+#df=df.transpose()
+df.style.background_gradient(cmap='jet_r').to_excel('Endresult.xlsx', engine='openpyxl')
+
+
+import seaborn as sns
+sns.set(font_scale=.75)
+import matplotlib.pyplot as plt
+f, ax = plt.subplots(figsize=(10, 15))
+ax.xaxis.tick_top()
+cmap = plt.get_cmap("jet_r")
+_ = sns.heatmap(df, square=True, cmap=cmap, annot=True)
+plt.savefig('Endergebniss')
+
+
+
+
+
+##################
+
+df2=pd.DataFrame(df.mean(axis=1))
+pd.set_option('display.max_rows', 500)
+df2['index1'] = df2.index
+df2 = df2.rename_axis('MyIdx').sort_values(by = [0,'MyIdx'])
+df2=df2.rename(columns={0: "efficiency","index1":"explanatory variable"})
+df2=df2.replace(['QuarantineForInternationalTravellersPartial'], 'QuarantinInternationalTravellersPartial')
+#(regex=[r'^ba.$', 'QuarantineForInternationalTravellersPartial'], value='new')#df['BrandName'] = df['BrandName'].replace(['ABC', 'AB'], 'A')
+df2=df2.replace('QuarantineForInternationalTravellersPartial','QuarantinInternationalTravellersPartial')
+df2=df2.replace('QuarantinInternationalTravellersPartial','QuarantinInternationalTravellerPartial')
+df2=df2.replace('QuarantinInternationalTravellerPartial','QuarntinInternationalTravellerPartial')
+df2=df2.replace('MasksVoluntaryClosedSpacesPartial','MaskVoluntaryCloseSpacePartial')#MasksVoluntaryClosedSpacesPartial
+df2=df2.replace('MasksMandatoryClosedSpacesPartial','MaskMandatoryCloseSpacePartial')#MasksVoluntaryClosedSpacesPartial
+df2=df2.replace('QuarantineForInternationalTravellers','QuarantinInternationalTravellers')
+df=df2#pd.read_excel(r"C:\Users\Hamed\Desktop\permutation_error.xlsx")
+fig, axs = plt.subplots(1,2, figsize=(16.25, 9))
+axs = axs.ravel()
+
+df = df.iloc[::-1]
+#plt.figure(figsize=(10,15))
+sns.pointplot(data=df[0:40:], y="explanatory variable", x="efficiency",ax=axs[1])
+sns.pointplot(data=df[40:80:], y="explanatory variable", x="efficiency",ax=axs[0],color='orange')
+#plt.xticks(rotation=90)
+
+axs[0].set_xlabel('mean efficiency')
+
+axs[1].set_xlabel('mean efficiency')
+#axs[0].grid()
+#axs[1].grid()
+plt.savefig('efficiencies')
+#plt.grid()
+plt.show()

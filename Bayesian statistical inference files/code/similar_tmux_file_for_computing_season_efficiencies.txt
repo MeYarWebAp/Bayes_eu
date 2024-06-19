@@ -1,0 +1,222 @@
+###******************************HALLO*******************************
+import pandas as pd
+data_encoded =pd.read_excel("data_encoded.xlsx")
+ml= ['Spring','Winter','Autumn','Summer']
+cs=['Netherlands','Czechia','Lithuania','Austria','Poland','Slovenia','Estonia','Italy','Slovakia','Ireland','Denmark',
+            'Iceland','Cyprus','Greece','Belgium','Bulgaria','France','Germany','Latvia','Spain','Norway','Romania','Liechtenstein',
+         'Portugal','Luxembourg','Hungary','Malta','Croatia','Finland','Sweden']
+###***************************BAYESIAN GOVERMENT COVID APPLICATION**************************************************WRITEN BY:
+###********************************************************************************************************HAMED KHALILI***********
+###***************************INPUTS OF THE PROGRAM********************************************************************************************
+ml.sort()
+import pandas as pd
+import base64
+
+
+azResults=[]
+Results=[]
+for cns in cs:
+    country=[cns]#
+    for tage in [7]:
+        for massnahme in ml:
+            incidence_days_number=tage
+            print(incidence_days_number)
+            X=[massnahme]
+            print(X)
+
+
+    #X=['MasksMandatoryAllSpaces','MasksMandatoryClosedSpaces']
+
+
+            method="hierarchical"#or#pooled#or#unpooled
+            ###********************************************************************************************************************************************
+            #['ClosDaycare','ClosDaycarePartial','ClosPrimPartial','ClosSecPartial','ClosPrim','ClosSec','ClosHighPartial','ClosHigh']
+            #['RestaurantsCafes','RestaurantsCafesPartial']
+            #['GymsSportsCentres','GymsSportsCentresPartial']
+            #['Teleworking','TeleworkingPartial','WorkplaceClosuresPartial','AdaptationOfWorkplace','AdaptationOfWorkplacePartial','WorkplaceClosures']
+            #['MasksMandatoryClosedSpacesPartial','MasksMandatoryAllSpaces','MasksMandatoryClosedSpaces','MasksMandatoryAllSpacesPartial']
+            #y_pred =this is almost identical to y_est except we do not specify the observed data. PyMC considers this to be a stochastic node 
+            #(as opposed to an observed node) and as the MCMC sampler runs - it also samples data from y_est.
+
+            """
+            ['Netherlands','Czechia','Lithuania','Austria','Poland','Slovenia','Estonia','Italy','Slovakia','Ireland','Denmark',
+            'Iceland','Cyprus','Greece','Belgium','Bulgaria','France','Germany','Latvia','Spain','Norway','Romania','Liechtenstein',
+             'Portugal','Luxembourg','Hungary','Malta','Croatia','Finland','Sweden']
+
+            ['EntertainmentVenuesPartial','RestaurantsCafesPartial','EntertainmentVenues','MassGatherAll','ClosSec','GymsSportsCentresPartial','ClosPrim',
+             'NonEssentialShopsPartial','ClosPubAnyPartial','RestaurantsCafes','GymsSportsCentres','MassGather50','PrivateGatheringRestrictions',
+             'MassGatherAllPartial',
+             'ClosHigh','NonEssentialShops','ClosSecPartial','OutdoorOver500','ClosDaycare','BanOnAllEvents','IndoorOver500','QuarantineForInternationalTravellers',
+             'ClosHighPartial','IndoorOver100','Teleworking','ClosPubAny','PlaceOfWorshipPartial','MasksMandatoryClosedSpacesPartial','MassGather50Partial',
+             'StayHomeOrderPartial','OutdoorOver100','IndoorOver50','ClosPrimPartial','PrivateGatheringRestrictionsPartial','MasksMandatoryClosedSpaces',
+             'OutdoorOver1000','TeleworkingPartial','MasksMandatoryAllSpaces','OutdoorOver50','StayHomeOrder','QuarantineForInternationalTravellersPartial',
+             'MasksMandatoryAllSpacesPartial','StayHomeGen','PlaceOfWorship','ClosDaycarePartial','IndoorOver1000','BanOnAllEventsPartial',
+             'HotelsOtherAccommodationPartial',
+             'StayHomeRiskG','ClosureOfPublicTransportPartial','AdaptationOfWorkplace','HotelsOtherAccommodation','MasksVoluntaryClosedSpacesPartial',
+             'RegionalStayHomeOrderPartial','AdaptationOfWorkplacePartial','MasksVoluntaryAllSpaces','MasksVoluntaryAllSpacesPartial','MasksVoluntaryClosedSpaces',
+             'SocialCircle','WorkplaceClosures','RegionalStayHomeOrder','ClosureOfPublicTransport','StayHomeGenPartial','WorkplaceClosuresPartial',
+             'StayHomeRiskGPartial','SocialCirclePartial']
+
+
+             """
+            ###************MAIN BODY OF THE PROGRAM****************************************************************************************************
+
+            def add_elemant(element,lis,j):
+                    for i in lis:
+                        if element in i:
+                            return i[j]
+
+
+            colors = ['#348ABD', '#A60628', '#7A68A6', '#467821', '#D55E00', '#CC79A7', '#56B4E9', '#009E73', '#F0E442', '#0072B2']
+            import pandas as pd
+            import datetime
+            from datetime import timedelta
+            import warnings
+            warnings.filterwarnings("ignore", category=FutureWarning)
+            import seaborn as sns
+            import arviz as az
+            import itertools
+            import matplotlib.pyplot as plt
+            import numpy as np
+            import pymc3 as pm
+            import scipy
+            import scipy.stats as stats
+            from IPython.display import Image
+            from sklearn import preprocessing
+            import pandas as pd
+            import datetime
+            from IPython.display import display
+
+            def f(r,tr):
+                        for i in tr:
+
+                            if i ==r:
+                                return "+"#+str(tr).replace(",", " or")
+                            
+                            else:
+                                return "-"#+str(tr).replace(",", " or")
+                  #if method=="hierarchical":
+               #liss=[]
+            responses_plus=[]
+            responses_minus=[]
+            #liss_plus = pd.DataFrame({'country':[],'mean':[],'std':[],'count+':[],'count-':[],'mean+':[],'mean-':[],'std+':[],'std-':[]})
+            #for idx, name in (enumerate(cb['countriesAndTerritories'].value_counts().index.tolist())):
+            for name in country:
+                land=name
+
+                CBook=data_encoded.loc[(data_encoded['countriesAndTerritories'] == land)]
+                CBook=CBook.reset_index()
+                CBook['rpn_minus_one'+str(incidence_days_number)] = pd.Series(dtype='float')
+                CBook = CBook.replace(np.nan, 0)
+                for i in range (0,len(CBook)):
+                    #caesdayNplusone=CBook.loc[i+incidence_days_number, ['cases']].to_list()[0]
+                    #averagecasesdayoneafter=sum(CBook.iloc[i:i+incidence_days_number]['cases'].values)/incidence_days_number
+                    #averagecasesdayonebefore=sum(CBook.iloc[i-incidence_days_number:i]['cases'].values)/incidence_days_number
+                    #if averagecasesdayonetoNminusone ==0:
+                        #print("00000000")
+                    CBook.loc[i, ['rpn_minus_one'+str(incidence_days_number)]]=CBook.iloc[i]['7days_after_mean']/CBook.iloc[i]['7days_before_mean']-1
+                
+            mass='rpn_minus_one'+str(incidence_days_number)
+            CBook[str(X[0]).replace(",", " or")+''+ 'Rescd'] = CBook.apply(lambda row: land+f(row['season'],X), axis=1)
+            #CBook[str(X[0]).replace(",", " or")+''+ 'Rescd'].value_counts()
+            m=CBook.iloc[:]['rpn_minus_one7'].mean()
+            s=CBook.iloc[:]['rpn_minus_one7'].std()
+            
+            CBook_plus=CBook[(CBook.iloc[:][str(X[0]).replace(",", " or")+''+ 'Rescd'] == land+"+")]
+            CBook_minus=CBook[(CBook.iloc[:][str(X[0]).replace(",", " or")+''+ 'Rescd'] == land+"-")]
+            #print(len(CBook_minus))
+            df=CBook_minus
+            
+            le_plus = preprocessing.LabelEncoder()
+            le_minus = preprocessing.LabelEncoder()
+            rc=str(X[0]).replace(",", " or")+''+ 'Rescd'
+            clm_plus=CBook_plus[rc]
+            clm_minus=CBook_minus[rc]
+            response_idx_plus = le_plus.fit_transform(clm_plus)
+            response_idx_minus = le_minus.fit_transform(clm_minus)
+            response_plus = le_plus.classes_
+            response_minus = le_minus.classes_
+            #number_of_response_plus=len(response_plus)
+            #number_of_response_minus=len(response_minus)
+            #for i in range(0, number_of_response_codes):
+            if len(response_plus)==0:
+                response_plus=[land+"+",[]]
+                responses_plus.append(response_plus)
+            else:    
+                response_plus[0]=[response_plus[0],CBook_plus[clm_plus==response_plus[0]][mass].values.tolist()]
+                responses_plus.append(response_plus[0])
+            if len(response_minus)==0:
+                response_minus=[land+"-",[]]
+                responses_minus.append(response_minus)
+            else:
+                response_minus[0]=[response_minus[0],CBook_minus[clm_minus==response_minus[0]][mass].values.tolist()]
+                responses_minus.append(response_minus[0])
+            responses=responses_minus+responses_plus
+            #s_plus=0
+            #s_minus=0
+            m_plus=CBook_plus.iloc[:]['rpn_minus_one7'].mean()
+            #if responses[1][1]!=[]:
+            s_plus=CBook_plus.iloc[:]['rpn_minus_one7'].std()
+            m_minus=CBook_minus.iloc[:]['rpn_minus_one7'].mean()
+            #if responses[0][1]!=[]:
+            s_minus=CBook_minus.iloc[:]['rpn_minus_one7'].std()
+            #responses=responses_minus+responses_plus
+            with pm.Model() as model:
+                hyper_mu_parameter=pm.Normal('hyper_mu_parameter', mu=m,sd=s)#
+                if len(responses[1][1])<=1 or len(responses[0][1])<=1:
+                    hyper_sd_parameter=s
+                    #pm.Exponential("hyper_sd_parameter", lam=1/std_mean_positive)#
+                #hyper_sd_error_parameter=pm.Uniform('hyper_sd_error_parameter', lower=std_min_positive,upper=std_max_positive)
+                else:
+                    hyper_sd_parameter=pm.Uniform('hyper_sd_parameter', lower=min(s_minus,s_plus),upper=max(s_minus,s_plus))
+
+                hyper_nu_parameter=pm.Uniform('hyper_nu_parameter', lower=0,upper=30)
+
+                #phi_mean=pm.Uniform('phi_mean', lower=0,upper=1)
+                #phi_std=pm.Uniform('phi_std', lower=0,upper=1)
+                mu = dict()
+                sd=dict()
+                incidence = dict()
+                incidence_pred=dict()
+                #name_plus=responses_plus[0][0]
+                #observed_plus=responses_plus[0][1]
+
+                #name_minus=responses_minus[0][0]
+                #observed_minus=responses_minus[0][1]
+                    #nu[name] = pm.Uniform('nu_'+name, lower=0,upper=30)
+                for name,observed in responses:
+                    #std_land=s
+                    mu[name] = pm.Normal('mu_'+name, mu=hyper_mu_parameter,sd=hyper_sd_parameter)
+                    sd[name] = pm.Exponential('sd_'+name, lam=1/hyper_sd_parameter)
+                    #if len(observed_plus)==0:
+                        #incidence[name_plus] = pm.StudentT(name_plus,nu=hyper_nu_parameter_plus, mu=mu[name_plus], sigma=sd[name_plus]  )
+                    if len(observed)!=0:
+                        incidence[name] = pm.StudentT(name,nu=hyper_nu_parameter, mu=mu[name], sigma=sd[name]  ,observed=observed)
+                    incidence_pred[name] = pm.StudentT('incidence_pred'+name,nu=hyper_nu_parameter, mu=mu[name], sigma=sd[name]  )
+
+                sample_number=1000  
+
+                model_trace = pm.sample(sample_number,target_accept = 0.99)
+                azsum=az.summary(model_trace)
+                azResults.append([incidence_days_number,X,list(azsum.index),list(azsum.columns),azsum.values.tolist()])
+                def prob_responsea_efficient_over_responseb(responsea, responseb):
+                    l=[]
+                    for i in range(1000):
+                        a=model_trace.get_values('incidence_pred'+responsea)
+                        np.random.shuffle(a)
+                        b=model_trace.get_values('incidence_pred'+responseb)
+                        np.random.shuffle(b)
+                        l.append(np.float(sum(a < b))/len(a))
+                    return l
+                resu=[]
+                from statistics import mean
+                effdis=prob_responsea_efficient_over_responseb(land+"+", land+"-")
+                resu.append([land,[min (effdis),mean(effdis),max(effdis)]])
+                Results.append([incidence_days_number,X,resu])
+                score=Results
+                azscore=azResults
+                with open('spring_Resultsfile7.py', 'w') as f:
+                    f.write('score = %s' % score)
+                with open('spring_azResultsfile7.py', 'w') as azf:
+                    azf.write('azscore = %s' % azscore)
+
